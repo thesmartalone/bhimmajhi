@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bhimmajhi.cc.cd/sitemap.xml

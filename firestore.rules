@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /posts/{postId} {
+      // Anyone can see public posts.
+      allow read: if true;
+
+      // Only the signed-in admin account may create/update/delete posts.
+      allow create, update, delete:
+        if request.auth != null
+        && request.auth.token.email == "cutenrml@gmail.com";
+    }
+
+    // Like records — koi bhi like kar sakta hai
+    match /likes/{likeId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Like counts — koi bhi read/update kar sakta hai
+    match /likes_count/{postId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
